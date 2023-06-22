@@ -1,5 +1,9 @@
 import logo from './logo.svg'
 import './App.css'
+import Header from './Header'
+import Box from './Box'
+import { useState } from 'react'
+
 
 function App() {
     const greeting = <p>What should we have for lunch?</p>
@@ -20,10 +24,45 @@ function App() {
         color: 'black',
     }
 
+    
+
+    const [favoriteFood, setFavoriteFood] = useState('chicken rice')
+    const [names, setNames] = useState([])
+    const [properties, setProperties] = useState({
+        color: 'red',
+    })
+
+    // setFavoriteFood = () => {
+    //     // favoriteFood = "eggs"
+    // }
+    
+    // setNames = () => {
+    //     // names = ["alex", "bobby", "charlie"]
+    // }
+
+
+    const handler = () => {
+        setProperties({
+            color: 'purple',
+        })
+    }
     return (
         <div className='App'>
+            <h1>My favorite color is {properties.color}</h1>
+            <Header></Header>
             <header className='App-header'>
-                {/* <img src={logo} className='App-logo' alt='logo' /> */}
+                <div className='horizontal-box'>
+                    <Box number='10' bgcolor='blue'></Box>
+                    <Box number='12' bgcolor='red'></Box>
+                </div>
+                <button onClick={handler}>Click me</button>
+                <button
+                    onClick={() => {
+                        setFavoriteFood('cat')
+                    }}
+                >
+                    Click me again
+                </button>
                 <img src={require('./bubbletea.png')} alt='bubble-tea' />
                 <div style={teststyle}>Testing my css</div>
                 <div>{Math.floor(Math.random() * 10 + 10)}</div>
@@ -32,6 +71,7 @@ function App() {
                 <p>
                     Edit <code>src/App.js</code> and save to reload.
                 </p>
+                <img src={logo} className='App-logo' alt='logo' />
                 <a
                     className='App-link'
                     href='https://reactjs.org'
