@@ -62,6 +62,7 @@ export default function App() {
     )
 
     const handleSubmit = (e) => {
+        const newReview = { restaurant, review, rating: Number(rating) }
         // clone the original array
         //  const cloned = reviews.slice(); // when you slice an array with no arguments, you get back an exact clome
         //  // modify the clone
@@ -73,13 +74,18 @@ export default function App() {
         if (editIndex === -1) {
             setReviews([...reviews, { restaurant, review, rating }])
         } else {
-            const oldReview = reviews[editIndex]
-            const newReview = {
-                id: oldReview.id,
-                restaurant: restaurant,
-                review: review,
-                rating: rating,
-            }
+            // Updating an existing review
+            const updatedReviews = [...reviews]
+            updatedReviews[editIndex] = newReview
+            setReviews(updatedReviews)
+            setEditIndex(-1) // Reset edit index
+            // const oldReview = reviews[editIndex]
+            // const newReview = {
+            //     id: oldReview.id,
+            //     restaurant: restaurant,
+            //     review: review,
+            //     rating: rating,
+            // }
             // // clone the original array
             // const cloned = reviews.slice();
             // // update the clone
@@ -87,10 +93,10 @@ export default function App() {
             // // set the cloned back into the state
             // setReviews(cloned);
 
-            setReviews(
-                [...reviews.slice(0, editIndex), newReview],
-                ...reviews.slice(editIndex + 1)
-            )
+            // setReviews(
+            //     [...reviews.slice(0, editIndex), newReview],
+            //     ...reviews.slice(editIndex + 1)
+            // )
         }
         setRestaurant('')
         setReview('')
